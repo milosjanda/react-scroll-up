@@ -13,8 +13,9 @@ var ScrollUp = React.createClass({
     data: {
         startValue: 0,
         currentTime: 0, // store current time of animation
-        interval: null,  // store interval reference
-        intervalTime: 20 // how often calculate new position
+        startTime: null,
+        rafId: null,
+        lastPosition: null
     },
 
     propTypes: {
@@ -74,34 +75,37 @@ var ScrollUp = React.createClass({
     handleClick: function () {
         this.stopScrolling();
         this.data.startValue = window.scrollY;
+        this.data.lastPosition = window.scrollY;
         this.data.currentTime = 0;
+        this.data.startTime = null;
+        this.data.rafId = window.requestAnimationFrame(this.scrollStep);
+    },
 
-        var that = this;
-        this.data.interval = setInterval(function () {
+    scrollStep: function (timestamp) {
+        if (!this.data.startTime) {
+            this.data.startTime = timestamp;
+        }
 
-            /**
-             * TweenFunctions[that.props.easing] = function(t, b, _c, d) {...}
-             * t: current time, b: beginning value, _c: final value, d: total duration
-             *
-             */
-            var position = TweenFunctions[that.props.easing](
-                that.data.currentTime,
-                that.data.startValue,
-                that.props.topPosition,
-                that.props.duration
-            );
+        this.data.currentTime = timestamp - this.data.startTime;
 
-            if (position == that.props.topPosition) {
-                that.stopScrolling();
-            }
-            that.data.currentTime = that.data.currentTime + that.data.intervalTime;
+        var position = TweenFunctions[this.props.easing](
+            this.data.currentTime,
+            this.data.startValue,
+            this.props.topPosition,
+            this.props.duration
+        );
+
+        if (position > this.data.lastPosition) {
+            this.stopScrolling();
+        } else {
+            this.data.lastPosition = position;
             window.scrollTo(window.scrollY, position);
-
-        }, this.data.intervalTime);
+            this.data.rafId = window.requestAnimationFrame(this.scrollStep);
+        }
     },
 
     stopScrolling: function () {
-        clearInterval(this.data.interval);
+        window.cancelAnimationFrame(this.data.rafId);
     },
 
     render: function () {
