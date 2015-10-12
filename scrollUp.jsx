@@ -111,7 +111,8 @@ var ScrollUp = React.createClass({
     render: function () {
         var style = this.props.style;
         style.opacity = this.state.show ? 1 : 0;
-        style.transitionProperty = 'opacity';
+        style.visibility = this.state.show ? 'visible' : 'hidden';
+        style.transitionProperty = 'opacity, visibility';
 
         return (
             <div style={style} onClick={this.handleClick}>
