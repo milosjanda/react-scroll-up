@@ -34,7 +34,7 @@ var ScrollUp = React.createClass({displayName: "ScrollUp",
     getDefaultProps: function () {
         return {
             duration: 250,
-            easing: 'easeInCubic',
+            easing: 'easeOutCubic',
             style: {
                 position: 'fixed',
                 bottom: 50,
@@ -111,7 +111,8 @@ var ScrollUp = React.createClass({displayName: "ScrollUp",
     render: function () {
         var style = this.props.style;
         style.opacity = this.state.show ? 1 : 0;
-        style.transitionProperty = 'opacity';
+        style.visibility = this.state.show ? 'visible' : 'hidden';
+        style.transitionProperty = 'opacity, visibility';
 
         return (
             React.createElement("div", {style: style, onClick: this.handleClick}, 
