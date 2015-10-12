@@ -37,7 +37,7 @@ The position to which the scrollbar be moved after clicked.
 
 ### easing:string (optional)
 
-default: easeInCubic
+default: easeOutCubic
 
 Type of scrolling easing. You can specify some of this type of easing: https://github.com/chenglou/tween-functions
 

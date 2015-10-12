@@ -34,7 +34,7 @@ var ScrollUp = React.createClass({
     getDefaultProps: function () {
         return {
             duration: 250,
-            easing: 'easeInCubic',
+            easing: 'easeOutCubic',
             style: {
                 position: 'fixed',
                 bottom: 50,
