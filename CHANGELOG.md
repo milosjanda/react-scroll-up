@@ -1,3 +1,9 @@
+# [1.0.3]
+
+### Bug
+
+* **Dependency:** fix wrong dependencies
+
 # [1.0.2]
 
 ### Bug

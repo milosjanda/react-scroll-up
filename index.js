@@ -6,6 +6,7 @@
 'use strict';
 
 var React = require('react');
+var ReactDom = require('react-dom');
 var TweenFunctions = require('tween-functions');
 
 var ScrollUp = React.createClass({displayName: "ScrollUp",

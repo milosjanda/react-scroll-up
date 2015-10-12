@@ -1,12 +1,11 @@
 {
   "name": "react-scroll-up",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React component to render element for scroll to top of page",
   "author": "Milos Janda <milos.janda@gmail.com>",
   "scripts": {
     "build": "jsx scrollUp.jsx > index.js",
-    "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "npm run build"
   },
   "main": "index.js",
   "repository": {
@@ -28,9 +27,11 @@
 
   "dependencies": {
     "tween-functions": "~1.0.2",
+    "react": "~0.13.3"
+  },
+  "devDependencies": {
     "react-tools": "~0.13.3"
   },
-  "devDependencies": {},
   "readmeFilename": "README.md",
   "license": "MIT"
 }
