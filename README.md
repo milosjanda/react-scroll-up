@@ -2,7 +2,7 @@
 React component to add custom button (it can be something what you want) for scroll to top of page.
 
 Library uses [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame),
-if you want better browser compatibility, you can use something like  [https://gist.github.com/paulirish/1579671].
+if you want better browser compatibility (IE9 and older), you can use something like  [https://gist.github.com/paulirish/1579671].
 
 
 ## Install
@@ -12,6 +12,8 @@ npm install react-scroll-up
 ```
 
 ## How to use it
+
+[Live demo](http://milosjanda.github.io/react-scroll-up/)
 
 You have to define children element, for example `<span>UP</span>`
 
