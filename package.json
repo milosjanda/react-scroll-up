@@ -4,6 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "clean": "rm js/main.js",
+    "prebuild": "npm run clean",
     "build": "browserify -t reactify src/main.jsx -o js/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,9 +16,10 @@
   "author": "Milos Janda <milos.janda@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.13.0",
-    "react-scroll-up": "^1.0.1",
     "browserify": "^11.2.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-scroll-up": "^1.1.0",
     "reactify": "^1.1.1"
   },
   "devDependencies": {}

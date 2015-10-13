@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var ScrollUp = require('react-scroll-up');
 
 var App = React.createClass({
@@ -14,4 +15,4 @@ var App = React.createClass({
     }
 });
 
-React.render(<App />, document.getElementById('scroll-component'));
+ReactDOM.render(<App />, document.getElementById('scroll-component'));
