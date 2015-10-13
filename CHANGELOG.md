@@ -1,3 +1,9 @@
+# [1.1.0]
+
+### Other
+
+* **Compatibility:** update for react 0.14
+
 # [1.0.4]
 
 ### Bug

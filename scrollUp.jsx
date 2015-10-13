@@ -7,6 +7,7 @@
 
 var React = require('react');
 var TweenFunctions = require('tween-functions');
+var objectAssign = require('object-assign');
 
 var ScrollUp = React.createClass({
 
@@ -109,16 +110,18 @@ var ScrollUp = React.createClass({
     },
 
     render: function () {
-        var style = this.props.style;
+        var propStyle = this.props.style;
+        var element =
+            <div style={propStyle} onClick={this.handleClick}>
+                {this.props.children}
+            </div>;
+
+        var style = objectAssign({}, propStyle);
         style.opacity = this.state.show ? 1 : 0;
         style.visibility = this.state.show ? 'visible' : 'hidden';
         style.transitionProperty = 'opacity, visibility';
 
-        return (
-            <div style={style} onClick={this.handleClick}>
-                {this.props.children}
-            </div>
-        )
+        return React.cloneElement(element, {style: style});
     }
 });
 
