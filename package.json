@@ -4,7 +4,7 @@
   "description": "React component to render element for scroll to top of page",
   "author": "Milos Janda <milos.janda@gmail.com>",
   "scripts": {
-    "build": "jsx scrollUp.jsx > index.js",
+    "build": "babel scrollUp.jsx --out-file index.js",
     "prepublish": "npm run build"
   },
   "main": "index.js",
@@ -32,7 +32,7 @@
     "react": "0.13 - 0.14"
   },
   "devDependencies": {
-    "react-tools": "~0.14.0"
+    "babel": "^5.8.23"
   },
   "readmeFilename": "README.md",
   "license": "MIT"
