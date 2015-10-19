@@ -9,7 +9,8 @@ var React = require('react');
 var TweenFunctions = require('tween-functions');
 var objectAssign = require('object-assign');
 
-var ScrollUp = React.createClass({displayName: "ScrollUp",
+var ScrollUp = React.createClass({
+    displayName: 'ScrollUp',
 
     data: {
         startValue: 0,
@@ -22,17 +23,12 @@ var ScrollUp = React.createClass({displayName: "ScrollUp",
     propTypes: {
         topPosition: React.PropTypes.number,
         showUnder: React.PropTypes.number.isRequired, // show button under this position,
-        easing: React.PropTypes.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
-            'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint',
-            'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo',
-            'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic',
-            'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce',
-            'easeInOutBounce']),
+        easing: React.PropTypes.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce']),
         duration: React.PropTypes.number, // seconds
         style: React.PropTypes.object
     },
 
-    getDefaultProps: function () {
+    getDefaultProps: function getDefaultProps() {
         return {
             duration: 250,
             easing: 'easeOutCubic',
@@ -46,34 +42,34 @@ var ScrollUp = React.createClass({displayName: "ScrollUp",
                 transitionDelay: '0s'
             },
             topPosition: 0
-        }
+        };
     },
-    getInitialState: function () {
+    getInitialState: function getInitialState() {
         return {
             show: false
-        }
+        };
     },
-    shouldComponentUpdate: function (nextProps, nextState) {
+    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
         return nextState.show !== this.state.show;
     },
-    componentDidMount: function () {
+    componentDidMount: function componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
         window.addEventListener("wheel", this.stopScrolling, false);
     },
 
-    componentWillUnmount: function () {
+    componentWillUnmount: function componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener("wheel", this.stopScrolling, false);
     },
 
-    handleScroll: function () {
+    handleScroll: function handleScroll() {
         if (window.scrollY > this.props.showUnder) {
-            this.setState({show: true});
+            this.setState({ show: true });
         } else {
-            this.setState({show: false});
+            this.setState({ show: false });
         }
     },
-    handleClick: function () {
+    handleClick: function handleClick() {
         this.stopScrolling();
         this.data.startValue = window.scrollY;
         this.data.lastPosition = window.scrollY;
@@ -82,19 +78,14 @@ var ScrollUp = React.createClass({displayName: "ScrollUp",
         this.data.rafId = window.requestAnimationFrame(this.scrollStep);
     },
 
-    scrollStep: function (timestamp) {
+    scrollStep: function scrollStep(timestamp) {
         if (!this.data.startTime) {
             this.data.startTime = timestamp;
         }
 
         this.data.currentTime = timestamp - this.data.startTime;
 
-        var position = TweenFunctions[this.props.easing](
-            this.data.currentTime,
-            this.data.startValue,
-            this.props.topPosition,
-            this.props.duration
-        );
+        var position = TweenFunctions[this.props.easing](this.data.currentTime, this.data.startValue, this.props.topPosition, this.props.duration);
 
         if (position > this.data.lastPosition) {
             this.stopScrolling();
@@ -105,23 +96,24 @@ var ScrollUp = React.createClass({displayName: "ScrollUp",
         }
     },
 
-    stopScrolling: function () {
+    stopScrolling: function stopScrolling() {
         window.cancelAnimationFrame(this.data.rafId);
     },
 
-    render: function () {
+    render: function render() {
         var propStyle = this.props.style;
-        var element =
-            React.createElement("div", {style: propStyle, onClick: this.handleClick}, 
-                this.props.children
-            );
+        var element = React.createElement(
+            'div',
+            { style: propStyle, onClick: this.handleClick },
+            this.props.children
+        );
 
         var style = objectAssign({}, propStyle);
         style.opacity = this.state.show ? 1 : 0;
         style.visibility = this.state.show ? 'visible' : 'hidden';
         style.transitionProperty = 'opacity, visibility';
 
-        return React.cloneElement(element, {style: style});
+        return React.cloneElement(element, { style: style });
     }
 });
 
