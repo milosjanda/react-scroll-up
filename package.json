@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "object-assign": "^4.0.1",
-    "tween-functions": "~1.0.2"
+    "tween-functions": "^1.1.0"
   },
   "peerDependencies": {
     "react": "0.13 - 0.14"
