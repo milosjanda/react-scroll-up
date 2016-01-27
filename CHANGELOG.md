@@ -1,9 +1,13 @@
+# [1.1.2]
+
+* **Bugfix:** Fix stop scrolling if top position reached and add touch events
+* **Bugfix:** Show element after browser refresh, if page is under top position 
+
 # [1.1.1]
 
 * **Dependency:** update tween function
 * **Dependency:** update dev dependency
 * **NPM:** Update npmignore
-
 
 # [1.1.0]
 
