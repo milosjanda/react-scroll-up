@@ -15,8 +15,7 @@ var ScrollUp = React.createClass({
         startValue: 0,
         currentTime: 0, // store current time of animation
         startTime: null,
-        rafId: null,
-        lastPosition: null
+        rafId: null
     },
 
     propTypes: {
@@ -59,11 +58,13 @@ var ScrollUp = React.createClass({
     componentDidMount: function () {
         window.addEventListener('scroll', this.handleScroll);
         window.addEventListener("wheel", this.stopScrolling, false);
+        window.addEventListener("touchstart", this.stopScrolling, false);
     },
 
     componentWillUnmount: function () {
         window.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener("wheel", this.stopScrolling, false);
+        window.removeEventListener("touchstart", this.stopScrolling, false);
     },
 
     handleScroll: function () {
@@ -76,7 +77,6 @@ var ScrollUp = React.createClass({
     handleClick: function () {
         this.stopScrolling();
         this.data.startValue = window.scrollY;
-        this.data.lastPosition = window.scrollY;
         this.data.currentTime = 0;
         this.data.startTime = null;
         this.data.rafId = window.requestAnimationFrame(this.scrollStep);
@@ -96,10 +96,9 @@ var ScrollUp = React.createClass({
             this.props.duration
         );
 
-        if (position > this.data.lastPosition) {
+        if (window.scrollY <= this.props.topPosition) {
             this.stopScrolling();
         } else {
-            this.data.lastPosition = position;
             window.scrollTo(window.scrollY, position);
             this.data.rafId = window.requestAnimationFrame(this.scrollStep);
         }
