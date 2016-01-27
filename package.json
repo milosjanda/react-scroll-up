@@ -19,7 +19,7 @@
     "browserify": "^11.2.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-scroll-up": "^1.1.1",
+    "react-scroll-up": "^1.1.2",
     "reactify": "^1.1.1"
   },
   "devDependencies": {}
