@@ -56,6 +56,7 @@ var ScrollUp = React.createClass({
         return nextState.show !== this.state.show;
     },
     componentDidMount: function () {
+        this.handleScroll(); // initialize state
         window.addEventListener('scroll', this.handleScroll);
         window.addEventListener("wheel", this.stopScrolling, false);
         window.addEventListener("touchstart", this.stopScrolling, false);
