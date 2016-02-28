@@ -1,3 +1,7 @@
+# [1.1.3]
+
+* **Compatibility:** Replace function window.scrollY with window.pageYOffset for better compatibility
+
 # [1.1.2]
 
 * **Bugfix:** Fix stop scrolling if top position reached and add touch events

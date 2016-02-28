@@ -69,7 +69,7 @@ var ScrollUp = React.createClass({
     },
 
     handleScroll: function () {
-        if (window.scrollY > this.props.showUnder) {
+        if (window.pageYOffset > this.props.showUnder) {
             this.setState({show: true});
         } else {
             this.setState({show: false});
@@ -77,7 +77,7 @@ var ScrollUp = React.createClass({
     },
     handleClick: function () {
         this.stopScrolling();
-        this.data.startValue = window.scrollY;
+        this.data.startValue = window.pageYOffset;
         this.data.currentTime = 0;
         this.data.startTime = null;
         this.data.rafId = window.requestAnimationFrame(this.scrollStep);
@@ -97,10 +97,10 @@ var ScrollUp = React.createClass({
             this.props.duration
         );
 
-        if (window.scrollY <= this.props.topPosition) {
+        if (window.pageYOffset <= this.props.topPosition) {
             this.stopScrolling();
         } else {
-            window.scrollTo(window.scrollY, position);
+            window.scrollTo(window.pageYOffset, position);
             this.data.rafId = window.requestAnimationFrame(this.scrollStep);
         }
     },
