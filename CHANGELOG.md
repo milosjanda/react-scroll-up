@@ -1,3 +1,7 @@
+# [1.1.4]
+
+* **Compatibility:** update for react 0.15
+
 # [1.1.3]
 
 * **Compatibility:** Replace function window.scrollY with window.pageYOffset for better compatibility
