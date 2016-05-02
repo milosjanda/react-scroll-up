@@ -1,6 +1,6 @@
 # [1.1.4]
 
-* **Compatibility:** update for react 0.15
+* **Compatibility:** update for react 15.0
 
 # [1.1.3]
 
