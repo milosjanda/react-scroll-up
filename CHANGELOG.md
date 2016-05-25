@@ -1,3 +1,7 @@
+# [1.1.5]
+
+* **Compatibility:** update dependecies to react 15
+
 # [1.1.4]
 
 * **Compatibility:** update for react 15.0

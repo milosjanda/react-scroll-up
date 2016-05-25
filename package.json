@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-up",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "React component to render element for scroll to top of page",
   "author": "Milos Janda <milos.janda@gmail.com>",
   "scripts": {
