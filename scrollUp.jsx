@@ -69,6 +69,7 @@ var ScrollUp = React.createClass({
     },
 
     handleScroll: function () {
+      console.log('got here')
         if (window.pageYOffset > this.props.showUnder) {
             this.setState({show: true});
         } else {
