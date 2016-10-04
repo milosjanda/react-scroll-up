@@ -19,6 +19,13 @@ describe('<ScrollUp/>', function () {
   beforeEach(function () {
     window.pageYOffset = 0
   })
+  afterEach(function () {
+    try {
+      window.scrollTo.restore()
+    } catch (err) {
+      // do nothing...
+    }
+  })
 
   // and each `it` function describes an individual test
   it('is hidden when first rendered', function () {
@@ -49,6 +56,8 @@ describe('<ScrollUp/>', function () {
         <span>UP</span>
       </ScrollUp>
     );
+    // Ensure topPosition is set correctly
+    expect(renderedComponent.props.topPosition).to.equal(0)
     // Set the scroll position to 200 and trigger the event manually
     window.pageYOffset = 200
     renderedComponent.handleScroll()
@@ -70,4 +79,33 @@ describe('<ScrollUp/>', function () {
         done()
     }, 500)
   });
+  it('scrolls to `topPosition` when clicked', function (done) {
+    var renderedComponent = TestUtils.renderIntoDocument(
+      <ScrollUp showUnder={100} topPosition={100}>
+        <span>UP</span>
+      </ScrollUp>
+    );
+    // Ensure topPosition is set correctly
+    expect(renderedComponent.props.topPosition).to.equal(100)
+    // Set the scroll position to 200 and trigger the event manually
+    window.pageYOffset = 200
+    renderedComponent.handleScroll()
+
+    // "stub" the window.scrollTo function (because we want to see how it's called)
+    var scrollToSpy = sinon.stub(window, 'scrollTo', function (x, y) {
+      window.pageXOffset = x
+      window.pageYOffset = y
+      renderedComponent.handleScroll() // And make sure to trigger the handleScroll for each call
+    })
+
+    // Now activate the click function
+    renderedComponent.handleClick()
+
+    // Give it a bit to scroll back up
+    setTimeout(function () {
+        expect(scrollToSpy.lastCall.args[1]).to.be.within(95, 105)
+        expect(renderedComponent.state.show).to.be.false
+        done()
+    }, 500)
+  })
 });
