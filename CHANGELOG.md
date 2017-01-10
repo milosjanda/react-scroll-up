@@ -1,3 +1,7 @@
+# [1.2.0]
+
+* **Performance:** use of passive listeners to improve scrolling performance
+
 # [1.1.5]
 
 * **Compatibility:** update dependecies to react 15

@@ -8,6 +8,7 @@
 var React = require('react');
 var TweenFunctions = require('tween-functions');
 var objectAssign = require('object-assign');
+var detectPassiveEvents = require('detect-passive-events');
 
 var ScrollUp = React.createClass({
 
@@ -58,8 +59,8 @@ var ScrollUp = React.createClass({
     componentDidMount: function () {
         this.handleScroll(); // initialize state
         window.addEventListener('scroll', this.handleScroll);
-        window.addEventListener("wheel", this.stopScrolling, false);
-        window.addEventListener("touchstart", this.stopScrolling, false);
+        window.addEventListener("wheel", this.stopScrolling, detectPassiveEvents.hasSupport ? { passive : true } : false);
+        window.addEventListener("touchstart", this.stopScrolling, detectPassiveEvents.hasSupport ? { passive : true } : false);
     },
 
     componentWillUnmount: function () {
