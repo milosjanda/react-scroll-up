@@ -1,3 +1,7 @@
+# [1.2.1]
+
+* **Bugfix:** fix require of detect-passive-events
+
 # [1.2.0]
 
 * **Performance:** use of passive listeners to improve scrolling performance
