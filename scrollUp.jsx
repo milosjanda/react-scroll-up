@@ -76,7 +76,8 @@ var ScrollUp = React.createClass({
             this.setState({show: false});
         }
     },
-    handleClick: function () {
+    handleClick: function (e) {
+        e.preventDefault();
         this.stopScrolling();
         this.data.startValue = window.pageYOffset;
         this.data.currentTime = 0;
