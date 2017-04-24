@@ -9,8 +9,9 @@ var React = require('react');
 var TweenFunctions = require('tween-functions');
 var objectAssign = require('object-assign');
 var detectPassiveEvents = require('detect-passive-events').default;
+var createReactClass = require('create-react-class');
 
-var ScrollUp = React.createClass({
+var ScrollUp = createReactClass({
 
     data: {
         startValue: 0,
