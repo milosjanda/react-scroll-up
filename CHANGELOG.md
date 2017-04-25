@@ -1,3 +1,7 @@
+# [1.2.2]
+
+* **Compatibility:** Fix deprecated React.createClass
+
 # [1.2.1]
 
 * **Bugfix:** fix require of detect-passive-events
@@ -21,7 +25,7 @@
 # [1.1.2]
 
 * **Bugfix:** Fix stop scrolling if top position reached and add touch events
-* **Bugfix:** Show element after browser refresh, if page is under top position 
+* **Bugfix:** Show element after browser refresh, if page is under top position
 
 # [1.1.1]
 
