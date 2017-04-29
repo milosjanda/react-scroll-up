@@ -1,3 +1,7 @@
+# [1.2.3]
+
+* **Compatibility:** Fix deprecated React.PropTypes
+
 # [1.2.2]
 
 * **Compatibility:** Fix deprecated React.createClass

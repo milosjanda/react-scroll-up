@@ -35,6 +35,7 @@
     "create-react-class": "^15.5.2",
     "detect-passive-events": "^1.0.0",
     "object-assign": "^4.0.1",
+    "prop-types": "^15.5.8",
     "tween-functions": "^1.1.0"
   },
   "peerDependencies": {

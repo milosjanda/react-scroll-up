@@ -10,6 +10,7 @@ var TweenFunctions = require('tween-functions');
 var objectAssign = require('object-assign');
 var detectPassiveEvents = require('detect-passive-events').default;
 var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 
 var ScrollUp = createReactClass({
 
@@ -21,16 +22,16 @@ var ScrollUp = createReactClass({
     },
 
     propTypes: {
-        topPosition: React.PropTypes.number,
-        showUnder: React.PropTypes.number.isRequired, // show button under this position,
-        easing: React.PropTypes.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
+        topPosition: PropTypes.number,
+        showUnder: PropTypes.number.isRequired, // show button under this position,
+        easing: PropTypes.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
             'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint',
             'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo',
             'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic',
             'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce',
             'easeInOutBounce']),
-        duration: React.PropTypes.number, // seconds
-        style: React.PropTypes.object
+        duration: PropTypes.number, // seconds
+        style: PropTypes.object
     },
 
     getDefaultProps: function () {
