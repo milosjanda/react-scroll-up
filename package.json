@@ -7,6 +7,7 @@
     "clean": "rm js/main.js",
     "prebuild": "npm run clean",
     "build": "browserify -t reactify src/main.jsx -o js/main.js",
+    "build-dev": "browserify  -t [ envify --NODE_ENV development ] -t reactify src/main.jsx -o js/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,7 +17,8 @@
   "author": "Milos Janda <milos.janda@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "browserify": "^13.0.0",
+    "browserify": "^14.0.0",
+    "create-react-class": "^15.5.2",
     "react": "^15.0",
     "react-dom": "^15.0",
     "react-scroll-up": "^1.1.4",

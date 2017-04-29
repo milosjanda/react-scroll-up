@@ -1,8 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var ScrollUp = require('react-scroll-up');
+var createReactClass = require('create-react-class');
 
-var App = React.createClass({
+var App = createReactClass({
     render: function() {
 
         return (
