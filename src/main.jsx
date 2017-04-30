@@ -17,3 +17,7 @@ var App = createReactClass({
 });
 
 ReactDOM.render(<App />, document.getElementById('scroll-component'));
+
+if (process.env.NODE_ENV === "development") {
+    console.log('Development mode')
+}
