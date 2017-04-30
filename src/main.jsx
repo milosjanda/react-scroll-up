@@ -1,22 +1,15 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ScrollUp = require('react-scroll-up');
-var createReactClass = require('create-react-class');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ScrollUp from 'react-scroll-up';
 
-var App = createReactClass({
-    render: function() {
-
-        return (
-            <ScrollUp showUnder={20}
-                      easing={'easeOutCubic'}
-                      duration={500}>
-                <img src='img/up_arrow_round.png'/>
-            </ScrollUp>
-        )
-    }
-});
-
-ReactDOM.render(<App />, document.getElementById('scroll-component'));
+ReactDOM.render(
+    <ScrollUp showUnder={20}
+              easing={'easeOutCubic'}
+              duration={500}>
+        <img src='img/up_arrow_round.png'/>
+    </ScrollUp>,
+    document.getElementById('scroll-component')
+);
 
 if (process.env.NODE_ENV === "development") {
     console.log('Development mode')
