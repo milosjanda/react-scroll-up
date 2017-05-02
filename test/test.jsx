@@ -2,10 +2,6 @@
 import jsdom from 'jsdom';
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.window = document.defaultView;
-
-// Because otherwise sinon throw error: "TypeError: Attempted to wrap scrollTo which is already spied on"
-global.window.scrollTo = null;
-
 global.navigator = window.navigator;
 // Also apply a requestAnimationFrame polyfill
 require('raf').polyfill();
