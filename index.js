@@ -93,7 +93,7 @@ var ScrollUp = createReactClass({
         if (window.pageYOffset <= this.props.topPosition) {
             this.stopScrolling();
         } else {
-            window.scrollTo(window.pageYOffset, position);
+            window.scrollTo(window.pageXOffset, position);
             this.data.rafId = window.requestAnimationFrame(this.scrollStep);
         }
     },
