@@ -21,7 +21,6 @@
     "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",
     "browserify": "^14.0.0",
-    "create-react-class": "^15.5.2",
     "react": "^15.0",
     "react-dom": "^15.0",
     "react-scroll-up": "^1.1.4",
