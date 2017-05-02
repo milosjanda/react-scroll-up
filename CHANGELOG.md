@@ -1,3 +1,8 @@
+# [1.3.0]
+
+* **Internal:** Rewrite source to ES6 syntax
+* **Performance:**: Better performance in handleScroll
+
 # [1.2.3]
 
 * **Compatibility:** Fix deprecated React.PropTypes
