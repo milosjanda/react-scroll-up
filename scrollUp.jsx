@@ -5,95 +5,95 @@
 
 'use strict';
 
-var React = require('react');
-var TweenFunctions = require('tween-functions');
-var objectAssign = require('object-assign');
-var detectPassiveEvents = require('detect-passive-events').default;
-var createReactClass = require('create-react-class');
-var PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
+import TweenFunctions from 'tween-functions';
+import detectPassiveEvents from 'detect-passive-events';
+import objectAssign from 'object-assign';
 
-var ScrollUp = createReactClass({
+export default class ScrollUp extends React.Component {
 
-    data: {
-        startValue: 0,
-        currentTime: 0, // store current time of animation
-        startTime: null,
-        rafId: null
-    },
+    constructor(props) {
+        super(props);
 
-    propTypes: {
-        topPosition: PropTypes.number,
-        showUnder: PropTypes.number.isRequired, // show button under this position,
-        easing: PropTypes.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
-            'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint',
-            'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo',
-            'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic',
-            'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce',
-            'easeInOutBounce']),
-        duration: PropTypes.number, // seconds
-        style: PropTypes.object
-    },
+        // set default state
+        this.state = {show: false};
 
-    getDefaultProps: function () {
-        return {
-            duration: 250,
-            easing: 'easeOutCubic',
-            style: {
-                position: 'fixed',
-                bottom: 50,
-                right: 30,
-                cursor: 'pointer',
-                transitionDuration: '0.2s',
-                transitionTimingFunction: 'linear',
-                transitionDelay: '0s'
-            },
-            topPosition: 0
-        }
-    },
-    getInitialState: function () {
-        return {
-            show: false
-        }
-    },
-    shouldComponentUpdate: function (nextProps, nextState) {
+        // default property `data`
+        this.data = {
+            startValue: 0,
+            currentTime: 0, // store current time of animation
+            startTime: null,
+            rafId: null
+        };
+
+        // bind
+        this.handleClick = this.handleClick.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
+        this.scrollStep = this.scrollStep.bind(this);
+        this.stopScrolling = this.stopScrolling.bind(this);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
         return nextState.show !== this.state.show;
-    },
-    componentDidMount: function () {
-        this.handleScroll(); // initialize state
-        window.addEventListener('scroll', this.handleScroll);
-        window.addEventListener("wheel", this.stopScrolling, detectPassiveEvents.hasSupport ? { passive : true } : false);
-        window.addEventListener("touchstart", this.stopScrolling, detectPassiveEvents.hasSupport ? { passive : true } : false);
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentDidMount() {
+        this.handleScroll(); // initialize state
+
+        // Add all listeners which can start scroll
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener("wheel", this.stopScrolling, detectPassiveEvents.hasSupport ? {passive: true} : false);
+        window.addEventListener("touchstart", this.stopScrolling, detectPassiveEvents.hasSupport ? {passive: true} : false);
+    }
+
+    componentWillUnmount() {
+        // Remove all listeners which was registered
         window.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener("wheel", this.stopScrolling, false);
         window.removeEventListener("touchstart", this.stopScrolling, false);
-    },
+    }
 
-    handleScroll: function () {
+    /**
+     * Evaluate show/hide this component, depend on new position
+     */
+    handleScroll() {
         if (window.pageYOffset > this.props.showUnder) {
-            this.setState({show: true});
+            if (!this.state.show ) {
+                this.setState({show: true});
+            }
         } else {
-            this.setState({show: false});
+            if (this.state.show ) {
+                this.setState({show: false});
+            }
         }
-    },
-    handleClick: function () {
+    }
+
+    /**
+     * Handle click on the button
+     */
+    handleClick() {
         this.stopScrolling();
         this.data.startValue = window.pageYOffset;
         this.data.currentTime = 0;
         this.data.startTime = null;
         this.data.rafId = window.requestAnimationFrame(this.scrollStep);
-    },
+    }
 
-    scrollStep: function (timestamp) {
+
+    /**
+     * Calculate new position
+     * and scroll screen to new position or stop scrolling
+     * @param timestamp
+     */
+    scrollStep(timestamp) {
         if (!this.data.startTime) {
             this.data.startTime = timestamp;
         }
 
         this.data.currentTime = timestamp - this.data.startTime;
 
-        var position = TweenFunctions[this.props.easing](
+        let position = TweenFunctions[this.props.easing](
             this.data.currentTime,
             this.data.startValue,
             this.props.topPosition,
@@ -106,26 +106,63 @@ var ScrollUp = createReactClass({
             window.scrollTo(window.pageYOffset, position);
             this.data.rafId = window.requestAnimationFrame(this.scrollStep);
         }
-    },
+    }
 
-    stopScrolling: function () {
+    /**
+     * Stop Animation Frame
+     */
+    stopScrolling() {
         window.cancelAnimationFrame(this.data.rafId);
-    },
+    }
 
-    render: function () {
-        var propStyle = this.props.style;
-        var element =
+    /**
+     * Render component
+     */
+    render() {
+
+        let propStyle = this.props.style;
+        let element =
             <div style={propStyle} onClick={this.handleClick}>
                 {this.props.children}
             </div>;
 
-        var style = objectAssign({}, propStyle);
-        style.opacity = this.state.show ? 1 : 0;
-        style.visibility = this.state.show ? 'visible' : 'hidden';
-        style.transitionProperty = 'opacity, visibility';
+        let style = objectAssign({
+            opacity: (this.state.show ? 1 : 0),
+            visibility: (this.state.show ? 'visible' : 'hidden'),
+            transitionProperty: 'opacity, visibility',
+        }, propStyle);
 
         return React.cloneElement(element, {style: style});
     }
-});
+}
 
-module.exports = ScrollUp;
+
+// Set default props
+ScrollUp.defaultProps = {
+    duration: 250,
+    easing: 'easeOutCubic',
+    style: {
+        position: 'fixed',
+        bottom: 50,
+        right: 30,
+        cursor: 'pointer',
+        transitionDuration: '0.2s',
+        transitionTimingFunction: 'linear',
+        transitionDelay: '0s'
+    },
+    topPosition: 0
+};
+
+// Set validation property types
+ScrollUp.propTypes = {
+    topPosition: PropTypes.number,
+    showUnder: PropTypes.number.isRequired, // show button under this position,
+    easing: PropTypes.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
+        'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint',
+        'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo',
+        'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic',
+        'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce',
+        'easeInOutBounce']),
+    duration: PropTypes.number, // seconds
+    style: PropTypes.object
+};
