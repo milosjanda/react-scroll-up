@@ -1,9 +1,9 @@
 # react-scroll-up
 [![npm version](https://badge.fury.io/js/react-scroll-up.svg)](https://badge.fury.io/js/react-scroll-up)
-[![License](https://img.shields.io/npm/l/react-scroll-up.svg)]()
+[![License](https://img.shields.io/npm/l/react-scroll-up.svg)](https://github.com/milosjanda/react-scroll-up/blob/master/LICENSE)
 [![Dependency Status](https://img.shields.io/david/milosjanda/react-scroll-up.svg)]()
 [![peerDependency Status](https://img.shields.io/david/peer/milosjanda/react-scroll-up.svg)]()
-[![Build status](https://travis-ci.org/milosjanda/react-scroll-up.svg?branch=master)]()
+[![Build status](https://travis-ci.org/milosjanda/react-scroll-up.svg?branch=master)](https://travis-ci.org/milosjanda/react-scroll-up)
 
 React component to add custom button (it can be something what you want) for scroll to top of page.
 
