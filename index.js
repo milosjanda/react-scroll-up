@@ -166,19 +166,18 @@ var ScrollUp = function (_React$Component) {
         value: function render() {
 
             var propStyle = this.props.style;
-            var element = _react2.default.createElement(
+
+            var style = (0, _objectAssign2.default)({}, ScrollUp.defaultProps.style);
+            style = (0, _objectAssign2.default)(style, propStyle);
+            style.opacity = this.state.show ? 1 : 0;
+            style.visibility = this.state.show ? 'visible' : 'hidden';
+            style.transitionProperty = 'opacity, visibility';
+
+            return _react2.default.createElement(
                 'div',
-                { style: propStyle, onClick: this.handleClick },
+                { style: style, onClick: this.handleClick },
                 this.props.children
             );
-
-            var style = (0, _objectAssign2.default)({
-                opacity: this.state.show ? 1 : 0,
-                visibility: this.state.show ? 'visible' : 'hidden',
-                transitionProperty: 'opacity, visibility'
-            }, propStyle);
-
-            return _react2.default.cloneElement(element, { style: style });
         }
     }]);
 

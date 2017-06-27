@@ -11,10 +11,20 @@ require('raf').polyfill();
 
 
 import React from 'react';
+import { after, before, beforeEach, describe, it } from "mocha";
 import sinon from 'sinon';
-import {expect} from 'chai';
+
+import { expect } from 'chai';
+import { shallow } from 'enzyme'; // https://github.com/airbnb/enzyme/issues/465 shallow vs mount vs render
+import chai from 'chai'; // https://github.com/producthunt/chai-enzyme#setup
+import chaiEnzyme from 'chai-enzyme';
+
+chai.use(chaiEnzyme()); // Note the invocation at the end
+
 import TestUtils from 'react-dom/test-utils';
 import ScrollUp from '../scrollUp';
+
+
 
 // describe makes a test group
 describe('<ScrollUp/> states', function () {
@@ -149,3 +159,111 @@ describe('<ScrollUp/> move 2', function () {
     });
 
 });
+
+
+
+// describe makes a test group
+describe('<ScrollUp/> Styles', function () {
+
+    it('check rendered styles - default values - hidden', () => {
+        const wrapper = shallow(
+            <ScrollUp showUnder={100}>
+                <span>UP</span>
+            </ScrollUp>
+        );
+        wrapper.setState({show: false});
+
+        // default styles
+        expect(wrapper).to.have.style("position", 'fixed');
+        expect(wrapper).to.have.style("bottom", '50px');
+        expect(wrapper).to.have.style("right", '30px');
+        expect(wrapper).to.have.style("cursor", 'pointer');
+        expect(wrapper).to.have.style("transition-duration", '0.2s');
+        expect(wrapper).to.have.style("transition-timing-function", 'linear');
+        expect(wrapper).to.have.style("transition-delay", '0s');
+        expect(wrapper).to.have.style("opacity" , '0');
+        expect(wrapper).to.have.style("visibility", 'hidden');
+        expect(wrapper).to.have.style("transition-property",  'opacity, visibility');
+    });
+
+
+    it('check rendered styles - default values - visibile', () => {
+        const wrapper = shallow(
+            <ScrollUp showUnder={100}>
+                <span>UP</span>
+            </ScrollUp>
+        );
+
+        wrapper.setState({show: true});
+
+        // default styles
+        expect(wrapper).to.have.style("position", 'fixed');
+        expect(wrapper).to.have.style("bottom", '50px');
+        expect(wrapper).to.have.style("right", '30px');
+        expect(wrapper).to.have.style("cursor", 'pointer');
+        expect(wrapper).to.have.style("transition-duration", '0.2s');
+        expect(wrapper).to.have.style("transition-timing-function", 'linear');
+        expect(wrapper).to.have.style("transition-delay", '0s');
+        expect(wrapper).to.have.style("opacity" , '1');
+        expect(wrapper).to.have.style("visibility", 'visible');
+        expect(wrapper).to.have.style("transition-property",  'opacity, visibility');
+    });
+
+
+    it('check rendered styles - custom values', () => {
+        const wrapper = shallow(
+            <ScrollUp showUnder={100}
+                      style={{
+                          zIndex: 3,
+                          right: 20,
+                          opacity: 0,
+                          visibility: 'hidden',
+                          transitionProperty: 'opacity'}}>
+                <span>UP</span>
+            </ScrollUp>
+        );
+
+        // to check override opacity
+        wrapper.setState({show: true});
+
+        // default styles
+        expect(wrapper).to.have.style("position", 'fixed');
+        expect(wrapper).to.have.style("bottom", '50px');
+        expect(wrapper).to.have.style("cursor", 'pointer');
+        expect(wrapper).to.have.style("transition-duration", '0.2s');
+        expect(wrapper).to.have.style("transition-timing-function", 'linear');
+        expect(wrapper).to.have.style("transition-delay", '0s');
+
+        // overrides by props, but have to still value respective state
+        expect(wrapper).to.have.style("opacity" , '1');
+        expect(wrapper).to.have.style("visibility", 'visible');
+        expect(wrapper).to.have.style("transition-property",  'opacity, visibility');
+
+        // overrides default values
+        expect(wrapper).to.have.style("right", '20px');
+
+        // props styles
+        expect(wrapper).to.have.style("z-index", '3');
+    });
+
+});
+
+
+// describe makes a test group
+describe('<ScrollUp/> children', function () {
+
+    it('check if children is rendered ', () => {
+        window.pageYOffset = 500;
+
+        const wrapper = shallow(
+            <ScrollUp showUnder={100}>
+                <span>UP</span>
+            </ScrollUp>
+        );
+
+        expect(wrapper.find('span')).to.have.text('UP');
+    });
+
+});
+
+

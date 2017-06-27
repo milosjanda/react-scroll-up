@@ -1,3 +1,7 @@
+# [1.3.1]
+
+* **Bugfix:** Merge style property instead of override it
+
 # [1.3.0]
 
 * **Internal:** Rewrite source to ES6 syntax

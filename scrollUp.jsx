@@ -59,11 +59,11 @@ export default class ScrollUp extends React.Component {
      */
     handleScroll() {
         if (window.pageYOffset > this.props.showUnder) {
-            if (!this.state.show ) {
+            if (!this.state.show) {
                 this.setState({show: true});
             }
         } else {
-            if (this.state.show ) {
+            if (this.state.show) {
                 this.setState({show: false});
             }
         }
@@ -126,11 +126,11 @@ export default class ScrollUp extends React.Component {
                 {this.props.children}
             </div>;
 
-        let style = objectAssign({
-            opacity: (this.state.show ? 1 : 0),
-            visibility: (this.state.show ? 'visible' : 'hidden'),
-            transitionProperty: 'opacity, visibility',
-        }, propStyle);
+        let style = objectAssign({}, ScrollUp.defaultProps.style);
+        style = objectAssign(style, propStyle);
+        style.opacity = (this.state.show ? 1 : 0);
+        style.visibility = (this.state.show ? 'visible' : 'hidden');
+        style.transitionProperty = 'opacity, visibility';
 
         return React.cloneElement(element, {style: style});
     }
