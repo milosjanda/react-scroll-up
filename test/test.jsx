@@ -1,8 +1,11 @@
 // JSDom is used to allow the tests to run right from the command line (no browsers needed)
-import jsdom from 'jsdom';
-global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
-global.window = document.defaultView;
-global.navigator = window.navigator;
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
+
+global.window = dom.window;
+global.document = dom.window.document;
+
 // Also apply a requestAnimationFrame polyfill
 require('raf').polyfill();
 
@@ -10,8 +13,8 @@ require('raf').polyfill();
 import React from 'react';
 import sinon from 'sinon';
 import {expect} from 'chai';
-import TestUtils from 'react-addons-test-utils';
-import ScrollUp from '../index';
+import TestUtils from 'react-dom/test-utils';
+import ScrollUp from '../scrollUp';
 
 // describe makes a test group
 describe('<ScrollUp/> states', function () {
@@ -64,7 +67,7 @@ describe('<ScrollUp/> move 1', function () {
         );
 
         // "stub" the window.scrollTo function (because we want to see how it's called)
-        scrollToSpy = sinon.stub(global.window, 'scrollTo', (x, y) => {
+        scrollToSpy = sinon.stub(global.window, 'scrollTo').callsFake( (x, y) => {
             window.pageXOffset = x;
             window.pageYOffset = y;
             renderedComponent.handleScroll(); // And make sure to trigger the handleScroll for each call
@@ -115,7 +118,7 @@ describe('<ScrollUp/> move 2', function () {
         );
 
         // "stub" the window.scrollTo function (because we want to see how it's called)
-        scrollToSpy = sinon.stub(global.window, 'scrollTo', (x, y) => {
+        scrollToSpy = sinon.stub(global.window, 'scrollTo').callsFake( (x, y) => {
             window.pageXOffset = x;
             window.pageYOffset = y;
             renderedComponent.handleScroll(); // And make sure to trigger the handleScroll for each call
