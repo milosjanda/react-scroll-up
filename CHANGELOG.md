@@ -1,3 +1,7 @@
+# [1.3.2]
+
+* **Compatibility:** update dependecies to react 16
+
 # [1.3.1]
 
 * **Bugfix:** Merge style property instead of override it
