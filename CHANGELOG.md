@@ -1,3 +1,7 @@
+# [1.3.3]
+
+* **Bugfix:** Fix peer dependencies to be compliant with semver ranges
+
 # [1.3.2]
 
 * **Compatibility:** update dependecies to react 16
