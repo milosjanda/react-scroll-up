@@ -55,16 +55,36 @@ export default class ScrollUp extends React.Component {
     }
 
     /**
+     * call onShow callback if passed valid props
+     */
+    notifyOnShow() {
+        if (this.props.onShow && typeof this.props.onShow === "function") {
+            this.props.onShow();
+        }
+    }
+
+    /**
+     * call onHide callback if passed valid props
+     */
+    notifyOnHide() {
+        if (this.props.onHide && typeof this.props.onHide === "function") {
+            this.props.onHide();
+        }
+    }
+
+    /**
      * Evaluate show/hide this component, depend on new position
      */
     handleScroll() {
         if (window.pageYOffset > this.props.showUnder) {
             if (!this.state.show) {
                 this.setState({show: true});
+                this.notifyOnShow();
             }
         } else {
             if (this.state.show) {
                 this.setState({show: false});
+                this.notifyOnHide();
             }
         }
     }
@@ -164,5 +184,7 @@ ScrollUp.propTypes = {
         'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce',
         'easeInOutBounce']),
     duration: PropTypes.number, // seconds
-    style: PropTypes.object
+    style: PropTypes.object,
+    onShow: PropTypes.func,
+    onHide: PropTypes.func
 };

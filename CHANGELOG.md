@@ -1,3 +1,7 @@
+# [1.3.4]
+
+* **Feature:** Add onShow and onHide react props
+
 # [1.3.3]
 
 * **Bugfix:** Fix peer dependencies to be compliant with semver ranges

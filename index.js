@@ -91,6 +91,30 @@ var ScrollUp = function (_React$Component) {
         }
 
         /**
+         * call onShow callback if passed valid props
+         */
+
+    }, {
+        key: 'notifyOnShow',
+        value: function notifyOnShow() {
+            if (this.props.onShow && typeof this.props.onShow === "function") {
+                this.props.onShow();
+            }
+        }
+
+        /**
+         * call onHide callback if passed valid props
+         */
+
+    }, {
+        key: 'notifyOnHide',
+        value: function notifyOnHide() {
+            if (this.props.onHide && typeof this.props.onHide === "function") {
+                this.props.onHide();
+            }
+        }
+
+        /**
          * Evaluate show/hide this component, depend on new position
          */
 
@@ -100,10 +124,12 @@ var ScrollUp = function (_React$Component) {
             if (window.pageYOffset > this.props.showUnder) {
                 if (!this.state.show) {
                     this.setState({ show: true });
+                    this.notifyOnShow();
                 }
             } else {
                 if (this.state.show) {
                     this.setState({ show: false });
+                    this.notifyOnHide();
                 }
             }
         }
@@ -210,5 +236,7 @@ ScrollUp.propTypes = {
     showUnder: _propTypes2.default.number.isRequired, // show button under this position,
     easing: _propTypes2.default.oneOf(['linear', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce']),
     duration: _propTypes2.default.number, // seconds
-    style: _propTypes2.default.object
+    style: _propTypes2.default.object,
+    onShow: _propTypes2.default.func,
+    onHide: _propTypes2.default.func
 };
