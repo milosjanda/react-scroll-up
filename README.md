@@ -56,6 +56,14 @@ default: 250
 
 Time to reach the `topPosition`
 
+### onShow:function (optional)
+
+Callback function to be called when the button is being displayed.
+
+### onHide:function (optional)
+
+Callback function to be called when the button is being hidden.
+
 ### style:object (optional)
 
 default:  

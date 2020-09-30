@@ -266,4 +266,55 @@ describe('<ScrollUp/> children', function () {
 
 });
 
+// describe makes a test group
+describe('<ScrollUp/> onShow onHide props', function () {
+    // This will be run before each test to reset the scroll position
+    beforeEach(() => {
+        window.pageYOffset = 0;
+    });
 
+    it('check onShow callback is working properly', function () {
+        let calledOnShow = false;
+
+        let renderedComponent = TestUtils.renderIntoDocument(
+            <ScrollUp showUnder={100} onShow={() => { calledOnShow = true }}>
+                <span>UP</span>
+            </ScrollUp>
+        );
+
+        // is hidden when first rendered
+        expect(renderedComponent.state.show).to.be.false;
+
+        // Set the scroll position to 200 and trigger the event manually
+        window.pageYOffset = 200;
+        renderedComponent.handleScroll();
+
+        expect(renderedComponent.state.show).to.be.true; // button is now displayed
+        expect(calledOnShow).to.be.true; // and callback was called
+    });
+
+    it('check onHide callback is working properly', function () {
+        let calledOnHide = false;
+
+        let renderedComponent = TestUtils.renderIntoDocument(
+            <ScrollUp showUnder={100} onHide={() => { calledOnHide = true }}>
+                <span>UP</span>
+            </ScrollUp>
+        );
+
+        // is hidden when first rendered
+        expect(renderedComponent.state.show).to.be.false;
+
+        // Set the scroll position to 200 and trigger the event manually
+        window.pageYOffset = 200;
+        renderedComponent.handleScroll();
+        expect(renderedComponent.state.show).to.be.true; // button is now displayed
+        expect(calledOnHide).to.be.false; // and callback was not yet called
+
+        // Set the scroll position to 50 and trigger the event manually
+        window.pageYOffset = 50;
+        renderedComponent.handleScroll();
+        expect(renderedComponent.state.show).to.be.false; // button is now hidden
+        expect(calledOnHide).to.be.true; // and callback was called
+    });
+});
