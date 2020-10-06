@@ -1,3 +1,7 @@
+# [1.3.5]
+
+* **Internal:** Add typescript declaration file
+
 # [1.3.4]
 
 * **Feature:** Add onShow and onHide react props
