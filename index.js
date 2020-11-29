@@ -25,8 +25,6 @@ var _tweenFunctions2 = _interopRequireDefault(_tweenFunctions);
 
 var _detectPassiveEvents = require('detect-passive-events');
 
-var _detectPassiveEvents2 = _interopRequireDefault(_detectPassiveEvents);
-
 var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
@@ -78,8 +76,8 @@ var ScrollUp = function (_React$Component) {
 
             // Add all listeners which can start scroll
             window.addEventListener('scroll', this.handleScroll);
-            window.addEventListener("wheel", this.stopScrolling, _detectPassiveEvents2.default.hasSupport ? { passive: true } : false);
-            window.addEventListener("touchstart", this.stopScrolling, _detectPassiveEvents2.default.hasSupport ? { passive: true } : false);
+            window.addEventListener("wheel", this.stopScrolling, _detectPassiveEvents.supportsPassiveEvents ? { passive: true } : false);
+            window.addEventListener("touchstart", this.stopScrolling, _detectPassiveEvents.supportsPassiveEvents ? { passive: true } : false);
         }
     }, {
         key: 'componentWillUnmount',
