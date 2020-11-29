@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TweenFunctions from 'tween-functions';
-import detectPassiveEvents from 'detect-passive-events';
+import { supportsPassiveEvents } from 'detect-passive-events';
 import objectAssign from 'object-assign';
 
 export default class ScrollUp extends React.Component {
@@ -43,8 +43,8 @@ export default class ScrollUp extends React.Component {
 
         // Add all listeners which can start scroll
         window.addEventListener('scroll', this.handleScroll);
-        window.addEventListener("wheel", this.stopScrolling, detectPassiveEvents.hasSupport ? {passive: true} : false);
-        window.addEventListener("touchstart", this.stopScrolling, detectPassiveEvents.hasSupport ? {passive: true} : false);
+        window.addEventListener("wheel", this.stopScrolling, supportsPassiveEvents ? { passive: true } : false);
+        window.addEventListener("touchstart", this.stopScrolling, supportsPassiveEvents ? { passive: true } : false);
     }
 
     componentWillUnmount() {

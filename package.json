@@ -32,7 +32,7 @@
     ]
   },
   "dependencies": {
-    "detect-passive-events": "^1.0.0",
+    "detect-passive-events": "^2.0.2",
     "object-assign": "^4.0.1",
     "prop-types": "^15.5.8",
     "tween-functions": "^1.1.0"
