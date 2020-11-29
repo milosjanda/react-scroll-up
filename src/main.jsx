@@ -8,7 +8,8 @@ ReactDOM.render(
               duration={500}>
         <img src='img/up_arrow_round.png'/>
     </ScrollUp>,
-    document.getElementById('scroll-component')
+    document.getElementById('scroll-component'),
+    () => {},
 );
 
 if (process.env.NODE_ENV === "development") {
