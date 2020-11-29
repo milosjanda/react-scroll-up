@@ -6,3 +6,4 @@ npm-debug.log
 # IntelliJ project files
 .idea
 
+package-lock.json
