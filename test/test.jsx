@@ -1,9 +1,11 @@
 // JSDom is used to allow the tests to run right from the command line (no browsers needed)
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
+const dom = new JSDOM(`<!DOCTYPE html><html lang="en"><body><p>Test</p></body></html>`);
 
+// noinspection JSConstantReassignment
 global.window = dom.window;
+// noinspection JSConstantReassignment
 global.document = dom.window.document;
 
 // Also apply a requestAnimationFrame polyfill
@@ -187,7 +189,7 @@ describe('<ScrollUp/> Styles', function () {
     });
 
 
-    it('check rendered styles - default values - visibile', () => {
+    it('check rendered styles - default values - visible', () => {
         const wrapper = shallow(
             <ScrollUp showUnder={100}>
                 <span>UP</span>
