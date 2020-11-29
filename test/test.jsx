@@ -11,7 +11,6 @@ global.document = dom.window.document;
 // Also apply a requestAnimationFrame polyfill
 require('raf').polyfill();
 
-
 import React from 'react';
 import { after, before, beforeEach, describe, it } from "mocha";
 import sinon from 'sinon';
@@ -20,13 +19,15 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme'; // https://github.com/airbnb/enzyme/issues/465 shallow vs mount vs render
 import chai from 'chai'; // https://github.com/producthunt/chai-enzyme#setup
 import chaiEnzyme from 'chai-enzyme';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 chai.use(chaiEnzyme()); // Note the invocation at the end
 
 import TestUtils from 'react-dom/test-utils';
 import ScrollUp from '../scrollUp';
 
-
+Enzyme.configure({ adapter: new Adapter() });
 
 // describe makes a test group
 describe('<ScrollUp/> states', function () {
