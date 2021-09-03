@@ -22,6 +22,8 @@ npm install react-scroll-up
 
 [Live demo](http://milosjanda.github.io/react-scroll-up/)
 
+How to import? 
+
 You have to define children element, for example `<span>UP</span>`
 
 ```jsx
