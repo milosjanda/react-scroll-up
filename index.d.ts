@@ -1,5 +1,5 @@
 declare module 'react-scroll-up' {
-  import React from 'react';
+  import React, { ReactNode } from 'react';
 
   export interface ScrollToTopProps {
     showUnder: number,
@@ -13,7 +13,8 @@ declare module 'react-scroll-up' {
     duration?: number,
     style?: object,
     onShow?: () => void,
-    onHide?: () => void
+    onHide?: () => void,
+    children?: ReactNode
   }
 
   export default class ScrollToTop extends React.Component<ScrollToTopProps, any> {}
