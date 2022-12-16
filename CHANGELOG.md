@@ -1,3 +1,14 @@
+
+# [1.4.0]
+* **Compatibility:** update dependecies to react 18
+
+# [1.3.7]
+* **Internal:** Update node version on test
+
+# [1.3.6]
+
+* **Internal:** Update react dependency and build
+
 # [1.3.5]
 
 * **Internal:** Add typescript declaration file
